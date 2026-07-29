@@ -1,0 +1,25 @@
+# Godot 4+ specific ignores
+/android/
+
+# Godot
+.godot/
+
+# C#
+.mono/
+bin/
+obj/
+
+# Visual Studio
+.vs/
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+
+# macOS
+.DS_Store
