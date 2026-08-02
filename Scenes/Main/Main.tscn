@@ -7,6 +7,17 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_e0vn5"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uspoy"]
+
+[sub_resource type="Sky" id="Sky_vdvpr"]
+sky_material = SubResource("ProceduralSkyMaterial_uspoy")
+
+[sub_resource type="Environment" id="Environment_w3f4d"]
+background_mode = 2
+sky = SubResource("Sky_vdvpr")
+tonemap_mode = 2
+tonemap_exposure = 1.24
+
 [node name="Main" type="Node3D" unique_id=1610425224]
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=354732368]
@@ -22,3 +33,6 @@ mesh = SubResource("BoxMesh_e0vn5")
 [node name="Player" parent="." unique_id=1226945987 instance=ExtResource("1_p8rbg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 script = ExtResource("2_qtv3y")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1453676849]
+environment = SubResource("Environment_w3f4d")
