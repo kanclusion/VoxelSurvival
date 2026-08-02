@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cbl5jxp3w4044"]
 
 [ext_resource type="PackedScene" uid="uid://st4ixc0mo7qx" path="res://Scenes/Player/Player.tscn" id="1_p8rbg"]
-[ext_resource type="Script" uid="uid://ddwc60hgah1gc" path="res://Scripts/Player/Player.cs" id="2_qtv3y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nesi2"]
 
@@ -32,8 +31,6 @@ mesh = SubResource("BoxMesh_e0vn5")
 
 [node name="Player" parent="." unique_id=1226945987 instance=ExtResource("1_p8rbg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-script = ExtResource("2_qtv3y")
-JumpVelocity = 10.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1453676849]
 environment = SubResource("Environment_w3f4d")

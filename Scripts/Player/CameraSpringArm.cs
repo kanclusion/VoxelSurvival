@@ -15,7 +15,7 @@ public partial class CameraSpringArm : SpringArm3D
     public override void _UnhandledInput(InputEvent @event)
     {
 
-        if (@event is InputEventMouseMotion mouseMotion)
+        if (@event is InputEventMouseMotion mouseMotion && Input.MouseMode == Input.MouseModeEnum.Captured)
 		{
             float newRotationX = Rotation.X - mouseMotion.Relative.Y * MouseSensibility;
             float newRotationY = Rotation.Y - mouseMotion.Relative.X * MouseSensibility;
@@ -24,6 +24,28 @@ public partial class CameraSpringArm : SpringArm3D
             newRotationX = Mathf.Clamp(newRotationX, -Mathf.Pi/2, Mathf.Pi / 4);
 
             Rotation = new Vector3(newRotationX, newRotationY, Rotation.Z);
+        }
+
+        if (@event.IsActionPressed("wheel_up"))
+        {
+            float newSpringLength = SpringLength - 1;
+            SpringLength = newSpringLength;
+        }
+        if (@event.IsActionPressed("wheel_down"))
+        {
+            float newSpringLength = SpringLength + 1;
+            SpringLength = newSpringLength;
+        }
+
+        if (@event.IsActionPressed("mouse_mode_toggle"))
+        {
+            if (Input.MouseMode == Input.MouseModeEnum.Captured)
+            {
+                Input.MouseMode = Input.MouseModeEnum.Visible;
+            } else
+            {
+                Input.MouseMode = Input.MouseModeEnum.Captured;
+            }
         }
     }
 
