@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cbl5jxp3w4044"]
 
 [ext_resource type="PackedScene" uid="uid://st4ixc0mo7qx" path="res://Scenes/Player/Player.tscn" id="1_p8rbg"]
+[ext_resource type="Script" uid="uid://ho0vwb8onou6" path="res://Scripts/UI/HudStats.cs" id="2_qtv3y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nesi2"]
 
@@ -16,6 +17,8 @@ background_mode = 2
 sky = SubResource("Sky_vdvpr")
 tonemap_mode = 2
 tonemap_exposure = 1.24
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e0vn5"]
 
 [node name="Main" type="Node3D" unique_id=1610425224]
 
@@ -34,3 +37,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1453676849]
 environment = SubResource("Environment_w3f4d")
+
+[node name="Label" type="Label" parent="." unique_id=501014742]
+oversampling_with_scale = 2
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(4, 4)
+text = "FPS
+"
+script = ExtResource("2_qtv3y")
+
+[node name="DeathZone" type="Area3D" parent="." unique_id=1138362545]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DeathZone" unique_id=650458173]
+transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -5, 0)
+shape = SubResource("BoxShape3D_e0vn5")
