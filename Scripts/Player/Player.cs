@@ -7,7 +7,6 @@ public partial class Player : CharacterBody3D
 {
     [Export] public float Speed = 5.0f;
     [Export] public float JumpVelocity = 6f;
-    [Export] public float MouseSensitivity = 0.005f;
     [Export] public float RotationSpeed = 10.0f;
     [Export] public float BodyRotate = 5f;
 
@@ -35,7 +34,7 @@ public partial class Player : CharacterBody3D
         //Falling
 
         ////Jump
-        if (Input.IsActionJustPressed("jump"))
+        if (Input.IsActionJustPressed("jump") && IsOnFloor())
         {
             velocity.Y += JumpVelocity;
         }

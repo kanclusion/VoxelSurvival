@@ -1,16 +1,35 @@
 [gd_scene format=3 uid="uid://st4ixc0mo7qx"]
 
+[ext_resource type="Script" uid="uid://dvdut51k6743t" path="res://Scenes/Player/CameraSpringArm.cs" id="1_s0eop"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h54ih"]
+albedo_color = Color(0.94092286, 0.5220254, 0.8295482, 1)
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_w3f4d"]
+material = SubResource("StandardMaterial3D_h54ih")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ft8w5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_vdvpr"]
+material = SubResource("StandardMaterial3D_ft8w5")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nesi2"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0eop"]
+albedo_color = Color(0.6453626, 0.47997183, 0.31666666, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e0vn5"]
+material = SubResource("StandardMaterial3D_s0eop")
 
 [node name="Player" type="CharacterBody3D" unique_id=1226945987]
 
 [node name="Ears" type="MeshInstance3D" parent="." unique_id=939567143]
 transform = Transform3D(-2.360415e-08, 0.54, 0, -0.54, -2.360415e-08, 0, 0, 0, 0.54, 0, 0.42330167, 0)
 mesh = SubResource("CylinderMesh_w3f4d")
+
+[node name="EYE" type="MeshInstance3D" parent="." unique_id=2096286428]
+transform = Transform3D(0.7, 0, 0, 0, -8.7560235e-09, -0.7, 0, 0.20031446, -3.059797e-08, 0, 0.36750335, -0.3189509)
+mesh = SubResource("CylinderMesh_vdvpr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=596535240]
 shape = SubResource("CapsuleShape3D_nesi2")
@@ -19,7 +38,9 @@ shape = SubResource("CapsuleShape3D_nesi2")
 mesh = SubResource("CapsuleMesh_e0vn5")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1504633522]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+spring_length = 3.0
+script = ExtResource("1_s0eop")
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1721050462]
-transform = Transform3D(1, 0, 0, 0, 0.90454006, 0.42638877, 0, -0.4263888, 0.90454, 0, 2.6050558, 6.778575)
+transform = Transform3D(1, 0, 0, 0, 0.90630776, 0.42261827, 0, -0.42261827, 0.90630776, 0, 0, 0)
