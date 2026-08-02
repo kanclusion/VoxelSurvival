@@ -33,6 +33,7 @@ mesh = SubResource("BoxMesh_e0vn5")
 [node name="Player" parent="." unique_id=1226945987 instance=ExtResource("1_p8rbg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 script = ExtResource("2_qtv3y")
+JumpVelocity = 10.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1453676849]
 environment = SubResource("Environment_w3f4d")
