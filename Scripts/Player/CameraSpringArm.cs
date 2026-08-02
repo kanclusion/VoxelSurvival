@@ -6,7 +6,6 @@ public partial class CameraSpringArm : SpringArm3D
 {
     [Export] public float MouseSensibility = 0.005f;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
         Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -29,11 +28,13 @@ public partial class CameraSpringArm : SpringArm3D
         if (@event.IsActionPressed("wheel_up"))
         {
             float newSpringLength = SpringLength - 1;
+            newSpringLength = Mathf.Clamp(newSpringLength, 3, 10);
             SpringLength = newSpringLength;
         }
         if (@event.IsActionPressed("wheel_down"))
         {
             float newSpringLength = SpringLength + 1;
+            newSpringLength = Mathf.Clamp(newSpringLength, 3, 10);
             SpringLength = newSpringLength;
         }
 

@@ -9,11 +9,12 @@ public partial class Player : CharacterBody3D
     [Export] public float JumpVelocity = 8f;
     [Export] public float RotationSpeed = 10.0f;
     [Export] public float BodyRotate = 5f;
+    [Export] public float GravityMultiplie = 2;
 
     private SpringArm3D _springArm3D;
     private Camera3D _camera;
-    //private float _gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
-    private float _gravity = 9.8f * 2;
+    private float _gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
+
     public override void _Ready()
     {
         _springArm3D = GetNode<SpringArm3D>("SpringArm3D");
@@ -26,11 +27,11 @@ public partial class Player : CharacterBody3D
         Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward", "move_back");
         Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
 
-        direction = direction.Rotated(Vector3.Up, _camera.GlobalRotation.Y);
+        direction = direction.Rotated(Vector3.Up, _springArm3D.GlobalRotation.Y);
         //Falling
         if (!IsOnFloor())
         {
-            velocity.Y -= _gravity * (float)delta;
+            velocity.Y -= _gravity * GravityMultiplie * (float)delta;
         }
         //Falling
 
