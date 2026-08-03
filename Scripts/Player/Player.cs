@@ -28,20 +28,6 @@ public partial class Player : CharacterBody3D
 
     }
 
-    private void OnBodyEnteredDeathZone(Node3D body)
-    {
-        if (body == this)
-        {
-            // Используем CallDeferred для безопасной перезагрузки
-            CallDeferred(MethodName.ReloadScene);
-        }
-    }
-
-    private void ReloadScene()
-    {
-        GetTree().ReloadCurrentScene();
-    }
-
     public override void _PhysicsProcess(double delta)
     {
         Vector3 velocity = Velocity;
@@ -92,5 +78,19 @@ public partial class Player : CharacterBody3D
         GD.Print(Velocity);
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    private void OnBodyEnteredDeathZone(Node3D body)
+    {
+        if (body == this)
+        {
+            // Используем CallDeferred для безопасной перезагрузки
+            CallDeferred(MethodName.ReloadScene);
+        }
+    }
+
+    private void ReloadScene()
+    {
+        GetTree().ReloadCurrentScene();
     }
 }

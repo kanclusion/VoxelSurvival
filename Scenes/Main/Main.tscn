@@ -3,9 +3,17 @@
 [ext_resource type="PackedScene" uid="uid://st4ixc0mo7qx" path="res://Scenes/Player/Player.tscn" id="1_p8rbg"]
 [ext_resource type="Script" uid="uid://ho0vwb8onou6" path="res://Scripts/UI/HudStats.cs" id="2_qtv3y"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_nesi2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tw32j"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_nesi2"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0uixv"]
+albedo_color = Color(0.057510614, 0.057510607, 0.057510607, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_e0vn5"]
+material = SubResource("StandardMaterial3D_0uixv")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_uspoy"]
 
@@ -21,6 +29,17 @@ tonemap_exposure = 1.24
 [sub_resource type="BoxShape3D" id="BoxShape3D_e0vn5"]
 
 [node name="Main" type="Node3D" unique_id=1610425224]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1550037531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
+collision_layer = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=995510504]
+layers = 3
+mesh = SubResource("BoxMesh_nesi2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1645696472]
+shape = SubResource("BoxShape3D_tw32j")
 
 [node name="Ground" type="StaticBody3D" parent="." unique_id=354732368]
 
