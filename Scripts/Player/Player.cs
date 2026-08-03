@@ -14,6 +14,7 @@ public partial class Player : CharacterBody3D
     [Export] public float BodyRotate = 5f;
     [Export] public float GravityMultiplie = 2;
 
+    private Node3D _head;
     private SpringArm3D _springArm3D;
     private Camera3D _camera;
     private float _gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
@@ -21,8 +22,8 @@ public partial class Player : CharacterBody3D
 
     public override void _Ready()
     {
-        _springArm3D = GetNode<SpringArm3D>("SpringArm3D");
-        _camera = _springArm3D.GetNode<Camera3D>("Camera3D");
+        _head = GetNode<Node3D>("Head");
+        _springArm3D = _head.GetNode<SpringArm3D>("SpringArm3D");
         _deathZone = GetNode<Area3D>("/root/Main/DeathZone");
         _deathZone.BodyEntered += OnBodyEnteredDeathZone;
 
@@ -34,7 +35,8 @@ public partial class Player : CharacterBody3D
         Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_forward", "move_back");
         Vector3 direction = new Vector3(inputDir.X, 0, inputDir.Y).Normalized();
 
-        direction = direction.Rotated(Vector3.Up, _springArm3D.GlobalRotation.Y);
+        direction = Transform.Basis * direction;
+        direction = direction.Normalized();
 
         float currentSpeed;
 
@@ -78,6 +80,14 @@ public partial class Player : CharacterBody3D
         GD.Print(Velocity);
         Velocity = velocity;
         MoveAndSlide();
+    }
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        if (@event is InputEventMouseMotion motion &&
+            Input.MouseMode == Input.MouseModeEnum.Captured)
+        {
+            RotateY(-motion.Relative.X * 0.005f);
+        }
     }
 
     private void OnBodyEnteredDeathZone(Node3D body)

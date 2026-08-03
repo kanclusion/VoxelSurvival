@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://st4ixc0mo7qx"]
 
 [ext_resource type="Script" uid="uid://ddwc60hgah1gc" path="res://Scripts/Player/Player.cs" id="1_ft8w5"]
-[ext_resource type="Script" uid="uid://dvdut51k6743t" path="res://Scripts/Player/CameraSpringArm.cs" id="1_s0eop"]
+[ext_resource type="Script" uid="uid://5rp0p7d20wlp" path="res://Scripts/Player/Head.cs" id="2_ude3g"]
 [ext_resource type="PackedScene" uid="uid://dk2ww7nmckoom" path="res://Scenes/Player/InteractRay.tscn" id="3_h54ih"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h54ih"]
@@ -40,14 +40,17 @@ shape = SubResource("CapsuleShape3D_nesi2")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=946096099]
 mesh = SubResource("CapsuleMesh_e0vn5")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1504633522]
-transform = Transform3D(0.90630776, 0, 0.42261827, 0, 1, 0, -0.42261827, 0, 0.90630776, 1.005, 2, 0)
-spring_length = 3.0
-script = ExtResource("1_s0eop")
+[node name="Head" type="Node3D" parent="." unique_id=605415063]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+script = ExtResource("2_ude3g")
 
-[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=1721050462]
+[node name="SpringArm3D" type="SpringArm3D" parent="Head" unique_id=1504633522]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 1.005, 1.4, 0)
+spring_length = 3.0
+
+[node name="Camera3D" type="Camera3D" parent="Head/SpringArm3D" unique_id=1721050462]
 transform = Transform3D(1, 0, 0, 0, 0.9063077, 0.42261827, 0, -0.42261827, 0.9063077, 0, 0, 0)
 
-[node name="InteractRay" parent="SpringArm3D/Camera3D" unique_id=235054610 instance=ExtResource("3_h54ih")]
+[node name="InteractRay" parent="Head/SpringArm3D/Camera3D" unique_id=235054610 instance=ExtResource("3_h54ih")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 target_position = Vector3(0, 0.18, -6)
