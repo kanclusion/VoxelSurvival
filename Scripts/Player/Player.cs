@@ -19,13 +19,18 @@ public partial class Player : CharacterBody3D
     private Camera3D _camera;
     private float _gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
     private Area3D _deathZone;
+    private InteractRay _interactRay;
 
     public override void _Ready()
     {
         _head = GetNode<Node3D>("Head");
         _springArm3D = _head.GetNode<SpringArm3D>("SpringArm3D");
+        _camera = _springArm3D.GetNode<Camera3D>("Camera3D");
         _deathZone = GetNode<Area3D>("/root/Main/DeathZone");
         _deathZone.BodyEntered += OnBodyEnteredDeathZone;
+        _interactRay = _camera.GetNode<InteractRay>("InteractRay");
+        if (_interactRay == null)
+            GD.PrintErr("InteractRay not found!");
 
     }
 
@@ -77,9 +82,16 @@ public partial class Player : CharacterBody3D
 
 
         //Moving
-        GD.Print(Velocity);
+        //GD.Print(Velocity);
         Velocity = velocity;
         MoveAndSlide();
+    }
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("interact") && _interactRay != null && _interactRay.CurrentInteractable != null)
+        {
+            _interactRay.CurrentInteractable.Interact(this);
+        }
     }
     public override void _UnhandledInput(InputEvent @event)
     {
