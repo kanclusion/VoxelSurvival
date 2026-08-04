@@ -4,21 +4,29 @@ using System;
 public partial class InteractableBox : StaticBody3D, IInteractable
 {
     private MeshInstance3D _mesh;
-    private ShaderMaterial _outlineMaterial;
     private Tween _tween;
+    private MeshInstance3D _outlineMesh;
+    private StandardMaterial3D _material;
 
     public override void _Ready()
     {
         _mesh = GetNode<MeshInstance3D>("MeshInstance3D");
-        _outlineMaterial = _mesh.MaterialOverlay as ShaderMaterial;
-        if (_outlineMaterial == null)
+        _material = new StandardMaterial3D();
+        StandardMaterial3D original = _mesh.Mesh.SurfaceGetMaterial(0) as StandardMaterial3D;
+        if (original != null)
         {
-            GD.PrintErr("Outline material not found!");
-        } else
-        {
-            _outlineMaterial.SetShaderParameter("outline_width", 0.0f);
+            _material.AlbedoColor = original.AlbedoColor;
+            _material.Metallic = original.Metallic;
+            _material.Roughness = original.Roughness;
         }
+    
+        _mesh.MaterialOverride = _material;
 
+        _outlineMesh = _mesh.GetNode<MeshInstance3D>("MeshInstance3D_outline");
+        if (_outlineMesh != null)
+            _outlineMesh.Scale = new Vector3(0.94f, 0.94f, 0.94f);
+        else
+            GD.PrintErr("Outline mesh not found!");
     }
 
     public void Interact(Player player)
@@ -30,13 +38,11 @@ public partial class InteractableBox : StaticBody3D, IInteractable
 
         StandardMaterial3D material = _mesh.Mesh.SurfaceGetMaterial(0) as StandardMaterial3D;
 
-        if (material == null)
+        if (_material != null)
         {
-            material = new StandardMaterial3D();
-            _mesh.Mesh.SurfaceSetMaterial(0, material);
+            _material.AlbedoColor = new Color(GD.Randf(), GD.Randf(), GD.Randf());
         }
 
-        material.AlbedoColor = new Color(GD.Randf(), GD.Randf(), GD.Randf());
         GD.Print($"Куб {Name} взаимодействует!");
 
     }
@@ -47,22 +53,19 @@ public partial class InteractableBox : StaticBody3D, IInteractable
 
     public void SetHighlight(bool enabled)
     {
-        GD.Print($"SetHighlight({enabled}) called");
-        if (_outlineMaterial == null) return;
+        if (_outlineMesh == null) return;
 
-        // Убиваем старый Tween
         _tween?.Kill();
         _tween = CreateTween();
 
-        float target = enabled ? 6.0f : 0.0f;
-        float current = _outlineMaterial.GetShaderParameter("outline_width").AsSingle();
+        Vector3 targetScale = enabled ? Vector3.One : Vector3.Zero;
+        Vector3 currentScale = _outlineMesh.Scale;
 
-        // Плавно меняем силу обводки за 0.3 секунды
-        _tween.TweenMethod(Callable.From<float>(SetOutlineStrength), current, target, 0.1f);
+        _tween.TweenMethod(Callable.From<Vector3>(SetOutlineScale), currentScale, targetScale, 0.03f);
     }
 
-    private void SetOutlineStrength(float value)
+    private void SetOutlineScale(Vector3 scale)
     {
-        _outlineMaterial.SetShaderParameter("outline_width", value);
+        _outlineMesh.Scale = scale;
     }
 }

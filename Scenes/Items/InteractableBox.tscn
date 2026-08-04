@@ -28,7 +28,8 @@ script = ExtResource("1_jv8uc")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=320994520]
 mesh = SubResource("BoxMesh_e0vn5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1004491723]
+[node name="MeshInstance3D_outline" type="MeshInstance3D" parent="MeshInstance3D" unique_id=1004491723]
+transform = Transform3D(0.94, 0, 0, 0, 0.94, 0, 0, 0, 0.94, 0, 0, 0)
 mesh = SubResource("ArrayMesh_jv8uc")
 surface_material_override/0 = SubResource("StandardMaterial3D_sqqgr")
 
