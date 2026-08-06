@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://st4ixc0mo7qx" path="res://Scenes/Player/Player.tscn" id="1_p8rbg"]
 [ext_resource type="Script" uid="uid://ho0vwb8onou6" path="res://Scripts/UI/HudStats.cs" id="2_qtv3y"]
 [ext_resource type="PackedScene" uid="uid://duvftsu132loy" path="res://Scenes/Items/InteractableBox.tscn" id="3_cmk6n"]
+[ext_resource type="PackedScene" uid="uid://mwxs1rnbwtdu" path="res://Scenes/Enviroment/Door.tscn" id="4_i3fi7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nesi2"]
 
@@ -34,7 +35,7 @@ transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
 shape = SubResource("BoxShape3D_nesi2")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=801054275]
-transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0, 0, 0)
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 50, 0.0021297932, 0.015846252, -0.016796112)
 mesh = SubResource("BoxMesh_e0vn5")
 
 [node name="Player" parent="." unique_id=1226945987 instance=ExtResource("1_p8rbg")]
@@ -59,9 +60,12 @@ transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, -5, 0)
 shape = SubResource("BoxShape3D_e0vn5")
 
 [node name="InteractableBox2" parent="." unique_id=1070580549 instance=ExtResource("3_cmk6n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.1, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -9)
 collision_layer = 3
 
 [node name="InteractableBox" parent="." unique_id=1833654835 instance=ExtResource("3_cmk6n")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, -6)
 collision_layer = 3
+
+[node name="Door" parent="." unique_id=712447782 instance=ExtResource("4_i3fi7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.093, 1.8, -2.388)

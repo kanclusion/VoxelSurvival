@@ -53,4 +53,4 @@ transform = Transform3D(1, 0, 0, 0, 0.9063077, 0.42261827, 0, -0.42261827, 0.906
 
 [node name="InteractRay" parent="Head/SpringArm3D/Camera3D" unique_id=235054610 instance=ExtResource("3_h54ih")]
 transform = Transform3D(0.99999994, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
-target_position = Vector3(0, 0.18, -6)
+target_position = Vector3(0, -0.35, -5)

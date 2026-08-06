@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://mwxs1rnbwtdu"]
+
+[ext_resource type="Script" uid="uid://ujxvimxiknd4" path="res://Scripts/Items/Door.cs" id="1_u1siu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tw32j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_tw32j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_e0vn5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e0vn5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_nesi2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nesi2"]
+
+[node name="Door" type="Node3D" unique_id=712447782 node_paths=PackedStringArray("_doorBody")]
+script = ExtResource("1_u1siu")
+_doorBody = NodePath("Door")
+
+[node name="Frame" type="Node3D" parent="." unique_id=948668316]
+
+[node name="UpSide" type="StaticBody3D" parent="Frame" unique_id=2145583369]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.325, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/UpSide" unique_id=2106300895]
+transform = Transform3D(1.8, 0, 0, 0, 0.15, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("BoxShape3D_tw32j")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Frame/UpSide" unique_id=1974381153]
+transform = Transform3D(1.8, 0, 0, 0, 0.155, 0, 0, 0, 0.255, 0, 0, 0)
+mesh = SubResource("BoxMesh_tw32j")
+
+[node name="RightSide" type="StaticBody3D" parent="Frame" unique_id=1432007119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.825, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Frame/RightSide" unique_id=1848323480]
+transform = Transform3D(0.15, 0, 0, 0, 2.5, 0, 0, 0, 0.255, 0, 0, 0)
+mesh = SubResource("BoxMesh_e0vn5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/RightSide" unique_id=331141217]
+transform = Transform3D(0.15, 0, 0, 0, 2.5, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("BoxShape3D_e0vn5")
+
+[node name="LeftSide" type="StaticBody3D" parent="Frame" unique_id=582910737]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.825, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Frame/LeftSide" unique_id=984008688]
+transform = Transform3D(0.15, 0, 0, 0, 2.5, 0, 0, 0, 0.255, 0, 0, 0)
+mesh = SubResource("BoxMesh_e0vn5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Frame/LeftSide" unique_id=749812859]
+transform = Transform3D(0.15, 0, 0, 0, 2.5, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("BoxShape3D_e0vn5")
+
+[node name="Door" type="RigidBody3D" parent="." unique_id=1223366017]
+collision_layer = 3
+mass = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Door" unique_id=1724607824]
+transform = Transform3D(1.5, 0, 0, 0, 2.5, 0, 0, 0, 0.1, 0, 0, 0)
+layers = 3
+mesh = SubResource("BoxMesh_nesi2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Door" unique_id=358251519]
+transform = Transform3D(1.5, 0, 0, 0, 2.5, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("BoxShape3D_nesi2")
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="." unique_id=1343236359]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0.825, 0, 0)
+node_a = NodePath("../Frame/LeftSide")
+node_b = NodePath("../Door")
+angular_limit/enable = true
+angular_limit/upper = 0.0
+angular_limit/lower = 1.5707964
